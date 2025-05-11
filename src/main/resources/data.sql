@@ -10,8 +10,8 @@ DELETE FROM rbac_users;
 
 -- 创建初始用户
 INSERT INTO rbac_users (id, username, password, name, email, enabled) VALUES
-(1, 'admin', '$2a$10$EqKcp1WBKSHUVFRmPOlRCOeRbG0vUQl8MJU9JbWUwJkLs7cxAUJAe', '系统管理员', 'admin@example.com', true),
-(2, 'user', '$2a$10$EqKcp1WBKSHUVFRmPOlRCOeRbG0vUQl8MJU9JbWUwJkLs7cxAUJAe', '普通用户', 'user@example.com', true);
+(1, 'admin', '$2a$10$P7xkTfVa9XSw/ce55nBLneZWOCbKx8eTlP/wHkpYHZrNDcDx.zVr6', '系统管理员', 'admin@example.com', true),
+(2, 'user', '$2a$10$P7xkTfVa9XSw/ce55nBLneZWOCbKx8eTlP/wHkpYHZrNDcDx.zVr6', '普通用户', 'user@example.com', true);
 
 -- 创建角色
 INSERT INTO rbac_roles (id, name, description) VALUES
