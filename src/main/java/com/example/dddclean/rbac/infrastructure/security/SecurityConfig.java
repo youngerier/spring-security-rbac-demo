@@ -29,6 +29,12 @@ public class SecurityConfig {
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
     private final JwtTokenFilter jwtTokenFilter;
 
+    private static final String[] PUBLIC_URLS = {
+            "/api/auth/**",
+            "/h2-console/**"
+            // 如果有其他需要公开的路径，可以在这里添加
+    };
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -52,10 +58,10 @@ public class SecurityConfig {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/h2-console/**").permitAll() // 开发环境允许访问H2控制台
-                .anyRequest().authenticated();
+                .authorizeRequests(authorize -> authorize
+                        .antMatchers(PUBLIC_URLS).permitAll() // 使用忽略列表
+                        .anyRequest().authenticated()
+                );
 
         // 允许H2控制台的frame显示
         http.headers().frameOptions().sameOrigin();
